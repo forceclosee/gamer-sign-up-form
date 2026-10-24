@@ -5,6 +5,9 @@
 	--font-sans: "Orbitron Variable", sans-serif;
 	--font-mono: "JetBrains Mono Variable", monospace;
 
+	/* font-size */
+	--text-3xs: 0.6875rem;
+
 	/* color */
 	--color-primary: oklch(0.9 0.209 124.85);
 
@@ -13,6 +16,8 @@
 	--color-text: oklch(0.976 0.007 236.55);
 	--color-text-inverse: var(--color-bg-page);
 	--color-text-muted: oklch(0.741 0.027 249.98);
+
+	--color-border: oklch(0.519 0.038 248.57);
 
 	--color-text-error: light-dark(var(--color-red-900), var(--color-red-400));
 	--color-text-error-inverse: light-dark(
@@ -65,6 +70,7 @@
 		overflow-x: hidden;
 		/* set default font */
 		font-family: var(--font-sans);
+		font-size: calc(12 / 16 * 1rem);
 		/* set-default line height */
 		line-height: 1.5;
 
@@ -105,8 +111,13 @@
 	}
 
 	/* TYPOGRAPHY */
+	h1 {
+		font-size: clamp(2.25rem, 0.9499rem + 5.5469vw, 4.5rem);
+		line-height: 1.15;
+	}
+
 	p {
-		@apply text-base;
+		font-size: calc(12 / 16 * 1rem);
 	}
 }
 
@@ -119,4 +130,22 @@
 }
 @utility trim-text {
 	text-box: trim-both cap text;
+}
+
+@utility hover-underline {
+	background:
+		linear-gradient(currentColor 0 0) var(--p, 0) 100% / var(--d, 0) 3px
+		no-repeat;
+	transition:
+		0.3s,
+		background-position 0s 0.3s;
+
+	&:hover {
+		--d: 100%;
+		--p: 100%;
+	}
+}
+
+@utility tracking-500 {
+	letter-spacing: 0.16em;
 }

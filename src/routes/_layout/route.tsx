@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_layout")({
 
 function RouteComponent() {
 	return (
-		<div>
+		<div class="mx-auto grid grid-rows-[1fr_auto] max-inline-360 min-block-svh">
 			<Outlet />
 			<Footer />
 		</div>

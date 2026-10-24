@@ -15,7 +15,13 @@ interface Props extends ComponentProps<"button"> {
 
 export const Button = (props: ParentProps<Props>) => {
 	// default variant primary, default type button
-	const merged = mergeProps({ variant: "primary", type: "button" }, props);
+	const merged = mergeProps(
+		{
+			variant: "primary" as Props["variant"],
+			type: "button" as Props["type"],
+		},
+		props,
+	);
 
 	const [core, rest] = splitProps(merged, ["class", "variant", "children"]);
 
