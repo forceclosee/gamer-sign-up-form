@@ -13,6 +13,12 @@ import { Suspense } from "solid-js";
 import favicon from "/icon.svg";
 import globalCss from "#/styles/global.css?url";
 
+// Orbitron variable 400 - 900
+import "@fontsource-variable/orbitron";
+
+// Jetbrains mono variable 100 - 800
+import "@fontsource-variable/jetbrains-mono";
+
 export const Route = createRootRouteWithContext()({
 	head: () => ({
 		meta: [
@@ -81,7 +87,7 @@ export const Route = createRootRouteWithContext()({
 
 function RootComponent() {
 	return (
-		<html lang="en">
+		<html lang="en" class="bg-bg-page text-text">
 			<head>
 				<HydrationScript />
 				<HeadContent />

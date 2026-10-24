@@ -1,1 +1,122 @@
 @import "tailwindcss";
+
+@theme {
+	/* fonts */
+	--font-sans: "Orbitron Variable", sans-serif;
+	--font-mono: "JetBrains Mono Variable", monospace;
+
+	/* color */
+	--color-primary: oklch(0.9 0.209 124.85);
+
+	--color-bg-page: oklch(0.141 0.011 252.05);
+
+	--color-text: oklch(0.976 0.007 236.55);
+	--color-text-inverse: var(--color-bg-page);
+	--color-text-muted: oklch(0.741 0.027 249.98);
+
+	--color-text-error: light-dark(var(--color-red-900), var(--color-red-400));
+	--color-text-error-inverse: light-dark(
+		var(--color-red-200),
+		var(--color-red-950)
+	);
+	--color-border-error: light-dark(var(--color-red-800), var(--color-red-400));
+	--color-bg-error: light-dark(var(--color-red-100), var(--color-red-950));
+	--color-bg-error-inverse: light-dark(
+		var(--color-red-900),
+		var(--color-red-200)
+	);
+
+	--color-text-success: light-dark(
+		var(--color-green-900),
+		var(--color-green-200)
+	);
+	--color-text-success-inverse: light-dark(
+		var(--color-green-200),
+		var(--color-green-950)
+	);
+	--color-border-success: light-dark(
+		var(--color-green-700),
+		var(--color-green-400)
+	);
+	--color-bg-sucess: light-dark(var(--color-green-50), var(--color-green-950));
+	--color-bg-sucess-inverse: light-dark(
+		var(--color-green-900),
+		var(--color-green-200)
+	);
+}
+
+@layer base {
+	/* 	RESET */
+	html {
+		/* Reserve scrollbar area */
+		scrollbar-gutter: stable;
+		/* Enable smooth scrolling for anchor links */
+		@media (prefers-reduced-motion: no-preference) {
+			scroll-behavior: smooth;
+		}
+		/* Enable keywords animations */
+		interpolate-size: allow-keywords;
+	}
+
+	body {
+		/* Improve text rendering */
+		-webkit-font-smoothing: antialiased;
+		/* hide horizontal overflow */
+		overflow-x: hidden;
+		/* set default font */
+		font-family: var(--font-sans);
+		/* set-default line height */
+		line-height: 1.5;
+
+		@supports (overflow-x: clip) {
+			overflow-x: clip;
+		}
+	}
+
+	/* remove vertical white space for some element */
+	@supports (text-box: trim-both cap text) {
+		h1,
+		h2,
+		h3,
+		label,
+		li,
+		button,
+		a {
+			text-box: trim-both cap text;
+		}
+	}
+
+	/* Improve media defaults */
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		inline-size: 100%;
+	}
+
+	/* improve focus styles */
+	:focus-visible {
+		outline-offset: 3px;
+		outline-style: solid;
+		outline-width: 3px;
+		outline-color: var(--color-text-primary);
+	}
+
+	/* TYPOGRAPHY */
+	p {
+		@apply text-base;
+	}
+}
+
+@utility squircle {
+	corner-shape: squircle;
+}
+
+@utility trim-capital {
+	text-box: trim-both cap alphabetic;
+}
+@utility trim-text {
+	text-box: trim-both cap text;
+}
