@@ -1,0 +1,18 @@
+{
+	"bundler": "vite",
+	"projectName": "gamer-sign-up-form",
+	"mode": "file-router",
+	"typescript": true,
+	"packageManager": "pnpm",
+	"includeExamples": false,
+	"tailwind": true,
+	"projectPreset": "default",
+	"routerOnly": false,
+	"addOnOptions": {},
+	"git": true,
+	"install": true,
+	"intent": true,
+	"version": 1,
+	"framework": "solid",
+	"chosenAddOns": ["biome", "nitro", "better-auth", "form"]
+}
