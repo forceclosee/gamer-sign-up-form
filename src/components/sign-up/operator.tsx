@@ -1,5 +1,6 @@
 import { For } from "solid-js";
-import { Separator } from "../ui/base-separator";
+
+import { Separator } from "#/components/ui/base-separator";
 
 export const Operator = () => {
 	const validities = [
@@ -31,14 +32,14 @@ export const Operator = () => {
 	];
 
 	return (
-		<div class="font-mono uppercase">
-			<div class="flex flex-wrap justify-between gap-4 text-text-muted *:shrink-0 *:tracking-500 md:hidden">
+		<div class="uppercase">
+			<div class="flex flex-wrap justify-between gap-4 *:shrink-0 *:tracking-500 md:hidden">
 				<span>Operator ID</span>
 				<span>Unassigned</span>
 			</div>
 
 			<div class="hidden md:block">
-				<div class="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1.75 text-text-muted *:not-last:tracking-500">
+				<div class="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1.75 *:not-last:tracking-500">
 					<span>Operator ID</span>
 					<span>0/5 ready</span>
 					<span class="col-span-2 font-sans text-2xl font-bold tracking-wider">

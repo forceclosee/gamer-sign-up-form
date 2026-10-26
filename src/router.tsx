@@ -13,7 +13,7 @@ export function getRouter() {
 		defaultPreloadStaleTime: 0,
 		defaultNotFoundComponent: () => {
 			return (
-				<div class="flex flex-col items-center justify-center gap-6 p-8 text-center min-block-svh">
+				<div class="flex flex-col items-center justify-center gap-6 p-8 text-center text-base text-text min-block-svh">
 					<span class="text-4xl font-medium">404</span>
 					<h1 class="mbs-8 font-medium">Page Not Found</h1>
 					<p class="mbs-12">
@@ -26,7 +26,7 @@ export function getRouter() {
 		},
 		defaultErrorComponent: ({ reset }) => {
 			return (
-				<div class="flex flex-col items-center justify-center gap-6 p-8 text-center min-block-svh">
+				<div class="flex flex-col items-center justify-center gap-6 p-8 text-center text-base min-block-svh">
 					<p class="text-text-error">Something went wrong</p>
 					<Button
 						onClick={() => {

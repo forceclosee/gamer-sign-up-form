@@ -7,7 +7,7 @@ function Home() {
 	return (
 		<div class="p-8">
 			<h1 class="text-4xl font-bold">Welcome to TanStack Start</h1>
-			<p class="mt-4 text-lg text-text-muted">
+			<p class="mt-4 text-lg">
 				Edit <code>src/routes/index.tsx</code> to get started.
 			</p>
 			<Button>button</Button>

@@ -12,18 +12,23 @@ interface Props extends LinkComponentProps {
 
 export const Link = (props: Props) => {
 	// default variant primary
-	const merged = mergeProps({ variant: "primary" }, props);
+	const merged = mergeProps({ variant: "primary" as Props["variant"] }, props);
 
-	const [core, rest] = splitProps(merged, ["class", "variant", "children"]);
+	const [core, rest] = splitProps(merged, [
+		"to",
+		"class",
+		"variant",
+		"children",
+	]);
 
 	return (
 		<TanstackLink
-			to={props.to}
+			to={core.to}
 			class={cn(
 				"flex items-center justify-center px-4 font-medium transition-all duration-200 trim-text active:scale-95",
 				{
 					"bg-primary text-text-inverse min-block-9.5":
-						merged.variant === "primary",
+						core.variant === "primary",
 				},
 			)}
 			{...rest}>
