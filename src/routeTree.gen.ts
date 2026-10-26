@@ -11,7 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteRouteImport } from './routes/_layout/route'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
-import { Route as LayoutAuthSignUpRouteImport } from './routes/_layout/_auth/sign-up'
+import { Route as LayoutAuthLoginRouteImport } from './routes/_layout/_auth/login'
+import { Route as LayoutAuthSignupRouteImport } from './routes/_layout/_auth/signup'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const LayoutRouteRoute = LayoutRouteRouteImport.update({
@@ -23,9 +24,14 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRouteRoute,
 } as any)
-const LayoutAuthSignUpRoute = LayoutAuthSignUpRouteImport.update({
-  id: '/_auth/sign-up',
-  path: '/sign-up',
+const LayoutAuthLoginRoute = LayoutAuthLoginRouteImport.update({
+  id: '/_auth/login',
+  path: '/login',
+  getParentRoute: () => LayoutRouteRoute,
+} as any)
+const LayoutAuthSignupRoute = LayoutAuthSignupRouteImport.update({
+  id: '/_auth/signup',
+  path: '/signup',
   getParentRoute: () => LayoutRouteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
@@ -36,31 +42,35 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
-  '/sign-up': typeof LayoutAuthSignUpRoute
+  '/login': typeof LayoutAuthLoginRoute
+  '/signup': typeof LayoutAuthSignupRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
-  '/sign-up': typeof LayoutAuthSignUpRoute
+  '/login': typeof LayoutAuthLoginRoute
+  '/signup': typeof LayoutAuthSignupRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteRouteWithChildren
   '/_layout/': typeof LayoutIndexRoute
-  '/_layout/_auth/sign-up': typeof LayoutAuthSignUpRoute
+  '/_layout/_auth/login': typeof LayoutAuthLoginRoute
+  '/_layout/_auth/signup': typeof LayoutAuthSignupRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-up' | '/api/auth/$'
+  fullPaths: '/' | '/login' | '/signup' | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-up' | '/api/auth/$'
+  to: '/' | '/login' | '/signup' | '/api/auth/$'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/'
-    | '/_layout/_auth/sign-up'
+    | '/_layout/_auth/login'
+    | '/_layout/_auth/signup'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -85,11 +95,18 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRouteRoute
     }
-    '/_layout/_auth/sign-up': {
-      id: '/_layout/_auth/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof LayoutAuthSignUpRouteImport
+    '/_layout/_auth/login': {
+      id: '/_layout/_auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LayoutAuthLoginRouteImport
+      parentRoute: typeof LayoutRouteRoute
+    }
+    '/_layout/_auth/signup': {
+      id: '/_layout/_auth/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof LayoutAuthSignupRouteImport
       parentRoute: typeof LayoutRouteRoute
     }
     '/api/auth/$': {
@@ -104,12 +121,14 @@ declare module '@tanstack/solid-router' {
 
 interface LayoutRouteRouteChildren {
   LayoutIndexRoute: typeof LayoutIndexRoute
-  LayoutAuthSignUpRoute: typeof LayoutAuthSignUpRoute
+  LayoutAuthLoginRoute: typeof LayoutAuthLoginRoute
+  LayoutAuthSignupRoute: typeof LayoutAuthSignupRoute
 }
 
 const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
   LayoutIndexRoute: LayoutIndexRoute,
-  LayoutAuthSignUpRoute: LayoutAuthSignUpRoute,
+  LayoutAuthLoginRoute: LayoutAuthLoginRoute,
+  LayoutAuthSignupRoute: LayoutAuthSignupRoute,
 }
 
 const LayoutRouteRouteWithChildren = LayoutRouteRoute._addFileChildren(

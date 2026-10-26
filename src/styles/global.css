@@ -12,46 +12,37 @@
 	--color-primary: oklch(0.9 0.209 124.85);
 
 	--color-bg-page: oklch(0.141 0.011 252.05);
+	--color-bg-card: oklch(0.178 0.018 248.87);
 
 	--color-text: oklch(0.976 0.007 236.55);
 	--color-text-inverse: var(--color-bg-page);
-	--color-text-muted: oklch(0.741 0.027 249.98);
+	--color-text-muted: oklch(0.7 0.027 249.98 / 0.9);
 
-	--color-border: oklch(0.519 0.038 248.57);
+	--color-border: oklch(0.28 0.02 248.57);
+	--color-border-light: oklch(0.741 0.027 249.98);
 
-	--color-text-error: light-dark(var(--color-red-900), var(--color-red-400));
-	--color-text-error-inverse: light-dark(
-		var(--color-red-200),
-		var(--color-red-950)
-	);
-	--color-border-error: light-dark(var(--color-red-800), var(--color-red-400));
-	--color-bg-error: light-dark(var(--color-red-100), var(--color-red-950));
-	--color-bg-error-inverse: light-dark(
-		var(--color-red-900),
-		var(--color-red-200)
-	);
+	--color-button-hover-shadow: oklch(0.9004 0.2092 124.85 / 0.4);
 
-	--color-text-success: light-dark(
-		var(--color-green-900),
-		var(--color-green-200)
-	);
-	--color-text-success-inverse: light-dark(
-		var(--color-green-200),
-		var(--color-green-950)
-	);
-	--color-border-success: light-dark(
-		var(--color-green-700),
-		var(--color-green-400)
-	);
-	--color-bg-sucess: light-dark(var(--color-green-50), var(--color-green-950));
-	--color-bg-sucess-inverse: light-dark(
-		var(--color-green-900),
-		var(--color-green-200)
-	);
+	--color-text-error: oklch(0.704 0.1 22.216);
+	--color-text-error-inverse: oklch(0.258 0.092 26.042);
+	--color-border-error: var(--color-text-error);
+	--color-bg-error: var(--color-text-error-inverse);
+	--color-bg-error-inverse: oklch(0.885 0.062 18.334);
+
+	--color-text-success: var(--color-green-200);
+	--color-text-success-inverse: var(--color-green-950);
+	--color-border-success: var(--color-green-400);
+	--color-bg-sucess: var(--color-green-950);
+	--color-bg-sucess-inverse: var(--color-green-200);
 }
 
 @layer base {
 	/* 	RESET */
+	/* improve focus styles */
+	* {
+		outline-offset: 2px;
+	}
+
 	html {
 		/* Reserve scrollbar area */
 		scrollbar-gutter: stable;
@@ -69,7 +60,7 @@
 		/* hide horizontal overflow */
 		overflow-x: hidden;
 		/* set default font */
-		font-family: var(--font-sans);
+		font-family: var(--font-mono);
 		font-size: calc(12 / 16 * 1rem);
 		/* set-default line height */
 		line-height: 1.5;
@@ -104,10 +95,9 @@
 
 	/* improve focus styles */
 	:focus-visible {
-		outline-offset: 3px;
 		outline-style: solid;
-		outline-width: 3px;
-		outline-color: var(--color-text-primary);
+		outline-width: 2px;
+		outline-color: var(--color-primary);
 	}
 
 	/* TYPOGRAPHY */
@@ -115,9 +105,50 @@
 		font-size: clamp(2.25rem, 0.9499rem + 5.5469vw, 4.5rem);
 		line-height: 1.15;
 	}
+}
 
-	p {
-		font-size: calc(12 / 16 * 1rem);
+@layer components {
+	.signup-loader {
+		--color-1: oklch(1 0 none);
+		--color-2: oklch(1 0 none / 0);
+		--size: 0.667px;
+
+		display: inline-block;
+		position: relative;
+		font-size: calc(24 * var(--size));
+
+		&::before {
+			content: "TRANSMITTING";
+		}
+
+		&::after {
+			content: "";
+			inline-size: calc(5 * var(--size));
+			block-size: calc(5 * var(--size));
+			background: currentColor;
+			position: absolute;
+			inset-block-end: calc(10 * var(--size));
+			inset-inline-end: calc(-10 * var(--size));
+			animation: animloader 1s linear infinite;
+		}
+	}
+
+	@keyframes animloader {
+		0% {
+			box-shadow:
+				calc(10 * var(--size)) 0 var(--color-2),
+				calc(20 * var(--size)) 0 var(--color-2);
+		}
+		50% {
+			box-shadow:
+				calc(10 * var(--size)) 0 var(--color-1),
+				calc(20 * var(--size)) 0 var(--color-2);
+		}
+		100% {
+			box-shadow:
+				calc(10 * var(--size)) 0 var(--color-1),
+				calc(20 * var(--size)) 0 var(--color-1);
+		}
 	}
 }
 
@@ -148,4 +179,8 @@
 
 @utility tracking-500 {
 	letter-spacing: 0.16em;
+}
+
+@utility hover-button-shadow {
+	box-shadow: 0.25rem 0.25rem 0 var(--color-button-hover-shadow);
 }
