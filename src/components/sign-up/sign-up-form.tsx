@@ -1,10 +1,9 @@
-import { Link } from "@tanstack/solid-router";
-
 import { useAppForm } from "#/hook/form";
 import { signupSchema } from "#/lib/schema/sign-up-schema";
+import { updateFormState } from "#/lib/store/form-state.store";
 
 import { Separator } from "#/components/ui/base-separator";
-import { updateFormState } from "#/lib/store/form-state.store";
+import { Link } from "#/components/ui/link";
 
 export const SignupForm = () => {
 	const form = useAppForm(() => ({
@@ -103,15 +102,11 @@ export const SignupForm = () => {
 								label={
 									<>
 										I accept the{" "}
-										<Link
-											to="/signup"
-											class="py-0.5 text-primary hover-underline">
+										<Link variant="inline" to="/signup">
 											Terms
 										</Link>{" "}
 										and{" "}
-										<Link
-											to="/signup"
-											class="py-0.5 text-primary hover-underline">
+										<Link variant="inline" to="/signup">
 											Privacy Policy
 										</Link>
 										.
@@ -130,7 +125,7 @@ export const SignupForm = () => {
 
 			<p class="mbs-6.5 text-center text-sm">
 				Already an operator?{" "}
-				<Link to="/login" class="py-0.5 text-primary hover-underline">
+				<Link variant="inline" to="/login">
 					Log in
 				</Link>
 			</p>

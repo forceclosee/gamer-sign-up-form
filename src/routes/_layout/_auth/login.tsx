@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/solid-router'
+import { createFileRoute } from "@tanstack/solid-router";
 
-export const Route = createFileRoute('/_layout/_auth/login')({
-  component: RouteComponent,
-})
+export const Route = createFileRoute("/_layout/_auth/login")({
+	component: RouteComponent,
+});
 
 function RouteComponent() {
-  return <div>Hello "/_layout/_auth/login"!</div>
+	return <div>Hello "/_layout/_auth/login"!</div>;
 }

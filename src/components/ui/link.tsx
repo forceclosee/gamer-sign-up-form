@@ -1,13 +1,15 @@
 import {
 	Link as TanstackLink,
 	type LinkComponentProps,
+	type LinkProps,
 } from "@tanstack/solid-router";
 import { mergeProps, splitProps } from "solid-js";
 
 import { cn } from "#/utils/class-helper";
 
-interface Props extends LinkComponentProps {
-	variant?: "plain" | "primary";
+interface Props extends Omit<LinkComponentProps, "to"> {
+	variant?: "plain" | "primary" | "inline";
+	to: LinkProps["to"];
 }
 
 export const Link = (props: Props) => {
@@ -25,11 +27,11 @@ export const Link = (props: Props) => {
 		<TanstackLink
 			to={core.to}
 			class={cn(
-				"flex items-center justify-center px-4 font-medium transition-all duration-200 trim-text active:scale-95",
 				{
-					"bg-primary text-text-inverse min-block-9.5":
+					"flex items-center justify-center bg-primary px-4 font-medium text-text-inverse transition-all duration-200 min-block-9.5 trim-text active:scale-95":
 						core.variant === "primary",
 				},
+				{ "py-0.5 text-primary hover-underline": core.variant === "inline" },
 			)}
 			{...rest}>
 			{core.children}
