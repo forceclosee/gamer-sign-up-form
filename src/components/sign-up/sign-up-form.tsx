@@ -4,6 +4,7 @@ import { useAppForm } from "#/hook/form";
 import { signupSchema } from "#/lib/schema/sign-up-schema";
 
 import { Separator } from "#/components/ui/base-separator";
+import { updateFormState } from "#/lib/store/form-state.store";
 
 export const SignupForm = () => {
 	const form = useAppForm(() => ({
@@ -29,11 +30,17 @@ export const SignupForm = () => {
 			);
 
 			invalidInput?.focus();
+
+			updateFormState({ isSuccesfullySubmitted: false });
+
+			setTimeout(() => {
+				updateFormState({ isSuccesfullySubmitted: undefined });
+			}, 400);
 		},
 	}));
 
 	return (
-		<div class="">
+		<>
 			<div class="flex flex-wrap justify-between gap-x-4 gap-y-2 uppercase *:shrink-0 *:tracking-500">
 				<span>New operator</span>
 				<span class="@md/signup:hidden">All required</span>
@@ -127,6 +134,6 @@ export const SignupForm = () => {
 					Log in
 				</Link>
 			</p>
-		</div>
+		</>
 	);
 };

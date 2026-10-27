@@ -1,9 +1,10 @@
-import { Show, createUniqueId, createSignal } from "solid-js";
+import { Show, createUniqueId, createSignal, createEffect } from "solid-js";
 
 import { Check, Eye, EyeOff, Info, TriangleAlert } from "lucide-solid";
 
 import { useFieldContext, useFormContext } from "#/hook/form-context";
 import { createCapslock } from "#/hook/create-capslock";
+import { updateFormState } from "#/lib/store/form-state.store";
 import { toKebabCase } from "#/utils/attributes-helper";
 import { cn } from "#/utils/class-helper";
 
@@ -46,6 +47,76 @@ export const PasswordField = (props: Props) => {
 
 				const isInputValid = () =>
 					field().state.meta.isValid && field().state.meta.isDirty;
+
+				// synchronize form validity
+				createEffect(() => {
+					// password
+					if (field().name === "signupPassword") {
+						if (!isInputInvalid() && !isInputValid()) {
+							updateFormState({
+								passwordValidity: "pending",
+								isPasswordValid: undefined,
+							});
+							return;
+						}
+
+						if (isInputValid()) {
+							updateFormState({
+								passwordValidity: "ok",
+								isPasswordValid: true,
+							});
+							return;
+						}
+
+						if (isInputInvalid()) {
+							updateFormState({ isPasswordValid: false });
+
+							switch (field().state.meta.errors[0]?.message) {
+								case "Use at least 8 characters":
+									updateFormState({ passwordValidity: "too short" });
+									break;
+
+								case "Use at least one uppercase letter":
+									updateFormState({ passwordValidity: "malformed" });
+									break;
+
+								case "Use at least one number":
+									updateFormState({ passwordValidity: "malformed" });
+									break;
+
+								case "Use at least one special character":
+									updateFormState({ passwordValidity: "malformed" });
+									break;
+							}
+						}
+					}
+
+					// confirm password
+					if (field().name === "signupConfirmPassword") {
+						if (!isInputInvalid() && !isInputValid()) {
+							updateFormState({
+								confirmPasswordValidity: "pending",
+								isConfirmPasswordValid: undefined,
+							});
+							return;
+						}
+
+						if (isInputValid()) {
+							updateFormState({
+								confirmPasswordValidity: "ok",
+								isConfirmPasswordValid: true,
+							});
+							return;
+						}
+
+						if (isInputInvalid()) {
+							updateFormState({
+								confirmPasswordValidity: "mismatch",
+								isConfirmPasswordValid: false,
+							});
+						}
+					}
+				});
 
 				return (
 					<Field.Root>

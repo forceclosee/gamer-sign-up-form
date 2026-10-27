@@ -3,11 +3,13 @@ import {
 	Show,
 	type ComponentProps,
 	createUniqueId,
+	createEffect,
 } from "solid-js";
 
 import { Check, Info, TriangleAlert } from "lucide-solid";
 
 import { useFieldContext, useFormContext } from "#/hook/form-context";
+import { updateFormState } from "#/lib/store/form-state.store";
 import { createCapslock } from "#/hook/create-capslock";
 import { toKebabCase } from "#/utils/attributes-helper";
 import { cn } from "#/utils/class-helper";
@@ -44,6 +46,75 @@ export const TextField = (props: Props) => {
 
 				const isInputValid = () =>
 					field().state.meta.isValid && field().state.meta.isDirty;
+
+				// synchronize form validity
+				createEffect(() => {
+					// callsign
+					if (field().name === "signupName") {
+						if (!isInputInvalid() && !isInputValid()) {
+							updateFormState({
+								callsignValidity: "pending",
+								callsign: null,
+								isCallsignValid: undefined,
+							});
+							return;
+						}
+
+						if (isInputValid()) {
+							updateFormState({
+								callsignValidity: "ok",
+								callsign: field().state.value,
+								isCallsignValid: true,
+							});
+							return;
+						}
+
+						if (isInputInvalid()) {
+							updateFormState({ callsign: null, isCallsignValid: false });
+
+							switch (field().state.meta.errors[0]?.message) {
+								case "Enter a callsign":
+									updateFormState({ callsignValidity: "required" });
+									break;
+
+								case "Use at least 3 characters":
+									updateFormState({ callsignValidity: "too short" });
+									break;
+
+								case "Use 20 characters or fewer":
+									updateFormState({ callsignValidity: "too long" });
+									break;
+
+								case "Use letters, numbers, _ or - only":
+									updateFormState({ callsignValidity: "malformed" });
+									break;
+							}
+						}
+					}
+
+					// email
+					if (field().name === "signupEmail") {
+						if (!isInputInvalid() && !isInputValid()) {
+							updateFormState({
+								emailValidity: "pending",
+								isEmailValid: undefined,
+							});
+							return;
+						}
+
+						if (isInputValid()) {
+							updateFormState({ emailValidity: "ok", isEmailValid: true });
+							return;
+						}
+
+						if (isInputInvalid()) {
+							updateFormState({
+								emailValidity: "malformed",
+								isEmailValid: false,
+							});
+						}
+					}
+				});
 
 				return (
 					<Field.Root>

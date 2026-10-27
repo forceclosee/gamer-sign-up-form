@@ -6,12 +6,16 @@ import { Logo } from "#/components/icons/logo";
 import { Operator } from "#/components/sign-up/operator";
 import { Separator } from "#/components/ui/base-separator";
 import { SignupForm } from "#/components/sign-up/sign-up-form";
+import { classList } from "#/utils/class-helper";
+import { getPartialFormState } from "#/lib/store/form-state.store";
 
 export const Route = createFileRoute("/_layout/_auth/signup")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const isSuccesfullySubmitted = getPartialFormState("isSuccesfullySubmitted");
+
 	return (
 		<div class="grid items-center gap-4 overflow-clip px-4 py-8.5 md:grid-cols-[566fr_434fr]">
 			<div>
@@ -34,7 +38,15 @@ function RouteComponent() {
 				<Operator />
 			</div>
 
-			<div class="@container/signup relative grid items-center border border-border bg-bg-card min-block-176.25">
+			<div
+				class={classList(
+					"@container/signup relative grid items-center border border-border bg-bg-card min-block-176.25",
+					{
+						shake:
+							isSuccesfullySubmitted() !== undefined &&
+							!isSuccesfullySubmitted(),
+					},
+				)}>
 				<div class="px-[clamp(1.1875rem,-10.2454rem+48.7804cqw,2.4375rem)] py-[clamp(1.875rem,-2.6981rem+19.5121cqw,2.375rem)]">
 					<SignupForm />
 				</div>

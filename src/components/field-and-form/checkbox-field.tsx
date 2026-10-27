@@ -1,10 +1,13 @@
-import { useFieldContext, useFormContext } from "#/hook/form-context";
-import { toKebabCase } from "#/utils/attributes-helper";
+import { createEffect, type JSX, Show } from "solid-js";
+
 import { Check, TriangleAlert } from "lucide-solid";
 
-import { Checkbox } from "#/components/ui/kobalte-checkbox";
-import { type JSX, Show } from "solid-js";
+import { useFieldContext, useFormContext } from "#/hook/form-context";
+import { updateFormState } from "#/lib/store/form-state.store";
+import { toKebabCase } from "#/utils/attributes-helper";
 import { cn } from "#/utils/class-helper";
+
+import { Checkbox } from "#/components/ui/kobalte-checkbox";
 
 interface Props {
 	label: JSX.Element;
@@ -25,6 +28,32 @@ export const CheckboxField = (props: Props) => {
 
 				const isInputValid = () =>
 					field().state.meta.isValid && field().state.meta.isDirty;
+
+				// synchronize form validity
+				createEffect(() => {
+					// confirm password
+					if (field().name === "signupAcceptTerms") {
+						if (!isInputInvalid() && !isInputValid()) {
+							updateFormState({
+								termsValidity: "required",
+								isTermsValid: undefined,
+							});
+							return;
+						}
+
+						if (isInputValid()) {
+							updateFormState({ termsValidity: "ok", isTermsValid: true });
+							return;
+						}
+
+						if (isInputInvalid()) {
+							updateFormState({
+								termsValidity: "required",
+								isTermsValid: false,
+							});
+						}
+					}
+				});
 
 				return (
 					<Checkbox
