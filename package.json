@@ -23,6 +23,7 @@
 		"@tanstack/solid-router": "1.170.43",
 		"@tanstack/solid-router-devtools": "1.167.2",
 		"@tanstack/solid-start": "1.169.4",
+		"@tanstack/solid-store": "^0.11.2",
 		"better-auth": "^1.5.3",
 		"lucide-solid": "^1.61.0",
 		"nitro": "3.0.260903-beta",
