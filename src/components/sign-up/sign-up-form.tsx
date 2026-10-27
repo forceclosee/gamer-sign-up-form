@@ -8,7 +8,7 @@ import { Link } from "#/components/ui/link";
 export const SignupForm = () => {
 	const form = useAppForm(() => ({
 		defaultValues: {
-			signupName: "",
+			signupCallsign: "",
 			signupEmail: "",
 			signupPassword: "",
 			signupConfirmPassword: "",
@@ -57,7 +57,7 @@ export const SignupForm = () => {
 				}}
 				class="grid gap-5.5">
 				<form.AppForm>
-					<form.AppField name="signupName">
+					<form.AppField name="signupCallsign">
 						{(field) => (
 							<field.TextField
 								label="Callsign"

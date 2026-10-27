@@ -39,7 +39,7 @@ for (const rule of passwordRules) {
 
 export const signupSchema = z
 	.object({
-		signupName: z
+		signupCallsign: z
 			.string()
 			.min(1, "Enter a callsign")
 			.min(3, "Use at least 3 characters")
