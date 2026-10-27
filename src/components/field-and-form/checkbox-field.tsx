@@ -20,7 +20,8 @@ export const CheckboxField = (props: Props) => {
 		<form.Subscribe selector={(state) => state.submissionAttempts}>
 			{(submissionAttempts) => {
 				const isInputInvalid = () =>
-					!field().state.meta.isValid && submissionAttempts() > 0;
+					!field().state.meta.isValid &&
+					(field().state.meta.isDirty || submissionAttempts() > 0);
 
 				const isInputValid = () =>
 					field().state.meta.isValid && field().state.meta.isDirty;
@@ -35,7 +36,7 @@ export const CheckboxField = (props: Props) => {
 							<Checkbox.Input class="peer" aria-invalid={isInputInvalid()} />
 							<Checkbox.Control
 								class={cn(
-									"border border-border bg-bg-page transition-all duration-200 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary hover:border-border-light",
+									"shrink-0 border border-border bg-bg-page transition-all duration-200 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary hover:border-border-light",
 									{
 										"border-border-error hover:border-border-error":
 											isInputInvalid(),

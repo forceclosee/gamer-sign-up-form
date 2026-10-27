@@ -28,9 +28,9 @@ export const Button = (props: ParentProps<Props>) => {
 	return (
 		<KbButton
 			class={cn(
-				"flex cursor-pointer items-center justify-center px-4 font-medium transition-all duration-200 trim-text active:not-disabled:scale-95",
+				"flex cursor-pointer items-center justify-center transition-all duration-200 trim-text active:not-disabled:scale-95",
 				{
-					"bg-primary text-text-inverse min-block-12 hover:bg-text hover:hover-button-shadow data-disabled:border data-disabled:border-primary data-disabled:bg-transparent data-disabled:text-primary":
+					"bg-primary px-4 font-medium text-text-inverse min-block-12 hover:bg-text hover:hover-button-shadow data-disabled:border data-disabled:border-primary data-disabled:bg-transparent data-disabled:text-primary":
 						core.variant === "primary",
 				},
 				core.class,

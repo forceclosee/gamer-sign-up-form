@@ -1,22 +1,23 @@
 import {
-	type JSX,
 	mergeProps,
 	Show,
 	type ComponentProps,
 	createUniqueId,
 } from "solid-js";
 
+import { Check, Info, TriangleAlert } from "lucide-solid";
+
 import { useFieldContext, useFormContext } from "#/hook/form-context";
+import { createCapslock } from "#/hook/create-capslock";
 import { toKebabCase } from "#/utils/attributes-helper";
+import { cn } from "#/utils/class-helper";
 
 import { Field } from "#/components/ui/base-field";
 import { Input } from "#/components/ui/base-input";
-import { cn } from "#/utils/class-helper";
-import { Check, TriangleAlert } from "lucide-solid";
 
 interface Props {
 	type?: ComponentProps<"input">["type"];
-	label: JSX.Element;
+	label: string;
 	description?: string;
 	placeholder: string;
 }
@@ -24,6 +25,8 @@ interface Props {
 export const TextField = (props: Props) => {
 	// default type 'text'
 	const merged = mergeProps({ type: "text" as Props["type"] }, props);
+
+	const isCapsLockPressed = createCapslock();
 
 	const inputAnchor = `--${createUniqueId()}`;
 
@@ -44,7 +47,20 @@ export const TextField = (props: Props) => {
 
 				return (
 					<Field.Root>
-						<Field.Label class="uppercase">{merged.label}</Field.Label>
+						<div class="flex flex-wrap items-center justify-between gap-4">
+							<Field.Label class="uppercase">
+								<span class="me-2 inline-block text-primary">{`>`}</span>
+								{merged.label}
+							</Field.Label>
+
+							<Show when={isCapsLockPressed()}>
+								<span class="text-text-info trim-text">
+									<Info class="me-2 inline-block block-[1.4em] inline-[1.4em]" />
+									Capslock is on
+								</span>
+							</Show>
+						</div>
+
 						<Input
 							type={merged.type}
 							name={fieldName}
@@ -70,7 +86,7 @@ export const TextField = (props: Props) => {
 						{/* check icon on valid state */}
 						<Show when={isInputValid()}>
 							<Check
-								class="absolute inset-e-4 text-primary block-[1.8em] inline-[1.8em]"
+								class="pointer-events-none absolute inset-e-4 text-primary block-5 inline-5"
 								style={{
 									"position-anchor": inputAnchor,
 									"position-area": "center",

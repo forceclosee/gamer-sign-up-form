@@ -13,14 +13,17 @@ export const Route = createFileRoute("/_layout/_auth/signup")({
 
 function RouteComponent() {
 	return (
-		<div class="grid items-center gap-4 px-4 py-8.5 md:grid-cols-[566fr_434fr]">
+		<div class="grid items-center gap-4 overflow-clip px-4 py-8.5 md:grid-cols-[566fr_434fr]">
 			<div>
 				<div class="flex flex-wrap items-center justify-between gap-4 *:shrink-0">
 					<Logo class="block-auto inline-max" />
 					<span class="uppercase md:hidden">0/5 ready</span>
 				</div>
 
-				<h1 class="mbs-[clamp(2.5rem,0.4776rem+8.6286vw,6rem)] font-sans font-bold tracking-wider text-text uppercase">{`// Join the nexus`}</h1>
+				<h1 class="mbs-[clamp(2.5rem,0.4776rem+8.6286vw,6rem)] font-sans font-bold tracking-wider text-text uppercase">
+					<span class="me-2 inline-block text-primary">{`//`}</span>
+					Join the nexus
+				</h1>
 
 				<p class="mbs-[clamp(0.5rem,0.1388rem+1.5408vw,1.125rem)] tracking-500 uppercase">
 					Initialize your NEONCORE identity
@@ -31,7 +34,7 @@ function RouteComponent() {
 				<Operator />
 			</div>
 
-			<div class="@container/signup relative grid items-center border border-border bg-bg-card min-block-169.25">
+			<div class="@container/signup relative grid items-center border border-border bg-bg-card min-block-176.25">
 				<div class="px-[clamp(1.1875rem,-10.2454rem+48.7804cqw,2.4375rem)] py-[clamp(1.875rem,-2.6981rem+19.5121cqw,2.375rem)]">
 					<SignupForm />
 				</div>

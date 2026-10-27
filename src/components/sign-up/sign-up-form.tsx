@@ -34,7 +34,7 @@ export const SignupForm = () => {
 
 	return (
 		<div class="">
-			<div class="flex flex-wrap justify-between gap-x-4 uppercase *:shrink-0 *:tracking-500">
+			<div class="flex flex-wrap justify-between gap-x-4 gap-y-2 uppercase *:shrink-0 *:tracking-500">
 				<span>New operator</span>
 				<span class="@md/signup:hidden">All required</span>
 				<span class="hidden @md/signup:inline">All fields required</span>
@@ -54,12 +54,7 @@ export const SignupForm = () => {
 					<form.AppField name="signupName">
 						{(field) => (
 							<field.TextField
-								label={
-									<>
-										<span class="text-primary">{`>`}</span>
-										<span>Callsign</span>
-									</>
-								}
+								label="Callsign"
 								placeholder="e.g. Vortex_07"
 								description="3–20 characters: letters, numbers, _ or -"
 							/>
@@ -70,12 +65,7 @@ export const SignupForm = () => {
 						{(field) => (
 							<field.TextField
 								type="email"
-								label={
-									<>
-										<span class="text-primary">{`>`}</span>
-										<span>Email</span>
-									</>
-								}
+								label="Email"
 								placeholder="you@example.com"
 							/>
 						)}
@@ -83,29 +73,18 @@ export const SignupForm = () => {
 
 					<form.AppField name="signupPassword">
 						{(field) => (
-							<field.TextField
-								type="password"
-								label={
-									<>
-										<span class="text-primary">{`>`}</span>
-										<span>Password</span>
-									</>
-								}
+							<field.PasswordField
+								label="Password"
 								placeholder="Create a password"
+								havePasswordStrengthMeter
 							/>
 						)}
 					</form.AppField>
 
 					<form.AppField name="signupConfirmPassword">
 						{(field) => (
-							<field.TextField
-								type="password"
-								label={
-									<>
-										<span class="text-primary">{`>`}</span>
-										<span>Confirm password</span>
-									</>
-								}
+							<field.PasswordField
+								label="Confirm password"
 								placeholder="Confirm your password"
 							/>
 						)}

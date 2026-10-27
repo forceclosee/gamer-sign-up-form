@@ -47,7 +47,7 @@ export const signupSchema = z
 			.regex(/^[a-zA-Z0-9_-]+$/, "Use letters, numbers, _ or - only"),
 		signupEmail: z.email("Enter a valid email, like you@example.com"),
 		signupPassword: passwordSchema,
-		signupConfirmPassword: z.string().min(1, "Password does not match"),
+		signupConfirmPassword: z.string().min(1, "Passwords don't match"),
 		signupAcceptTerms: z
 			.boolean()
 			.refine((val) => val === true, "Accept the terms to continue"),

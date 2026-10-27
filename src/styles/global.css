@@ -9,31 +9,37 @@
 	--text-3xs: 0.6875rem;
 
 	/* color */
-	--color-primary: oklch(0.9 0.209 124.85);
+	--color-primary: oklch(0.9 0.19 124.85);
 
 	--color-bg-page: oklch(0.141 0.011 252.05);
 	--color-bg-card: oklch(0.178 0.018 248.87);
 
 	--color-text: oklch(0.976 0.007 236.55);
-	--color-text-inverse: var(--color-bg-page);
 	--color-text-muted: oklch(0.7 0.027 249.98 / 0.9);
+	--color-text-inverse: var(--color-bg-page);
+	--color-text-inverse-muted: oklch(0.2 0.011 252.05);
 
 	--color-border: oklch(0.28 0.02 248.57);
 	--color-border-light: oklch(0.741 0.027 249.98);
 
 	--color-button-hover-shadow: oklch(0.9004 0.2092 124.85 / 0.4);
 
+	--color-text-info: oklch(0.8 0.07 246.23);
+	--color-bg-info: oklch(0.2 0.04 260);
+
 	--color-text-error: oklch(0.704 0.1 22.216);
-	--color-text-error-inverse: oklch(0.258 0.092 26.042);
+	--color-text-error-inverse: oklch(0.28 0.11 26.04);
 	--color-border-error: var(--color-text-error);
 	--color-bg-error: var(--color-text-error-inverse);
 	--color-bg-error-inverse: oklch(0.885 0.062 18.334);
 
 	--color-text-success: var(--color-green-200);
-	--color-text-success-inverse: var(--color-green-950);
+	--color-text-success-inverse: oklch(0.3 0.08 152.93);
 	--color-border-success: var(--color-green-400);
 	--color-bg-sucess: var(--color-green-950);
 	--color-bg-sucess-inverse: var(--color-green-200);
+
+	--color-fair: oklch(0.852 0.147 81.43);
 }
 
 @layer base {
@@ -183,4 +189,50 @@
 
 @utility hover-button-shadow {
 	box-shadow: 0.25rem 0.25rem 0 var(--color-button-hover-shadow);
+}
+
+@utility show-popover {
+	@media (prefers-reduced-motion: no-preference) {
+		--popover-scale: 0.6;
+		animation: content-show 0.3s ease-out;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		--popover-scale: 1;
+		animation: content-show 0.3s ease-out;
+	}
+}
+
+@utility hide-popover {
+	@media (prefers-reduced-motion: no-preference) {
+		--popover-scale: 0.6;
+		animation: content-hide 0.3s ease-in forwards;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		--popover-scale: 1;
+		animation: content-hide 0.3s ease-in forwards;
+	}
+}
+
+@keyframes content-show {
+	from {
+		opacity: 0;
+		scale: var(--popover-scale);
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+}
+
+@keyframes content-hide {
+	from {
+		opacity: 1;
+		scale: 1;
+	}
+	to {
+		opacity: 0;
+		scale: var(--popover-scale);
+	}
 }

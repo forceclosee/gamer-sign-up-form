@@ -12,7 +12,7 @@ const Root = (props: RootProps) => {
 	return (
 		<BaseField.Root
 			{...props}
-			class={cn("grid items-start gap-1.75 inline-full", props.class)}
+			class={cn("grid items-start gap-2 inline-full", props.class)}
 		/>
 	);
 };
@@ -20,12 +20,7 @@ const Root = (props: RootProps) => {
 interface LabelProps extends Omit<BaseField.Label.Props, "class">, ClashProps {}
 
 const Label = (props: LabelProps) => {
-	return (
-		<BaseField.Label
-			{...props}
-			class={cn("flex gap-2 tracking-500", props.class)}
-		/>
-	);
+	return <BaseField.Label {...props} class={cn("tracking-500", props.class)} />;
 };
 
 const Control = (props: BaseField.Control.Props) => {
@@ -37,7 +32,7 @@ interface DescriptionProps
 		ClashProps {}
 
 const Description = (props: DescriptionProps) => {
-	return <BaseField.Description {...props} class={cn("", props.class)} />;
+	return <BaseField.Description {...props} />;
 };
 
 interface FieldErrorProps
@@ -48,7 +43,10 @@ const FieldError = (props: FieldErrorProps) => {
 	return (
 		<BaseField.Error
 			{...props}
-			class={cn("text-3xs tracking-wider text-text-error", props.class)}
+			class={cn(
+				"text-3xs tracking-wider text-text-error trim-text",
+				props.class,
+			)}
 		/>
 	);
 };
