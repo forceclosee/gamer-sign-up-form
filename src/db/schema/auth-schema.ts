@@ -13,6 +13,7 @@ export const user = pgTable("user", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
   username: text("username").unique(),
+  acceptTerms: boolean("accept_terms"),
 });
 
 export const session = pgTable(

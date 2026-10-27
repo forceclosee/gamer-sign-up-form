@@ -1,0 +1,47 @@
+{
+  "type": "diff",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "4bb4dca8-0c96-40ed-9504-30adaeca5689",
+  "prevIds": [
+    "fb911be7-4702-4f8e-8821-9b3a0f8b7f15"
+  ],
+  "footprints": [
+    {
+      "statementType": "add_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "user",
+        "accept_terms"
+      ],
+      "writes": [
+        "s|col|public.user.accept_terms",
+        "n|col|public.user.accept_terms",
+        "e|col|public.user.accept_terms"
+      ],
+      "reads": [
+        "n|tbl|public.user",
+        "n|sch|public"
+      ]
+    }
+  ],
+  "deltas": [
+    {
+      "op": "create",
+      "row": {
+        "schema": "public",
+        "table": "user",
+        "name": "accept_terms",
+        "type": "boolean",
+        "typeSchema": null,
+        "notNull": false,
+        "dimensions": 0,
+        "default": null,
+        "generated": null,
+        "identity": null,
+        "entityType": "columns"
+      }
+    }
+  ]
+}

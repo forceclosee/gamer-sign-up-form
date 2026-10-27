@@ -50,7 +50,7 @@ export const TextField = (props: Props) => {
 				// synchronize form validity
 				createEffect(() => {
 					// callsign
-					if (field().name === "signupName") {
+					if (field().name === "signupCallsign") {
 						if (!isInputInvalid() && !isInputValid()) {
 							updateFormState({
 								callsignValidity: "pending",
