@@ -1,13 +1,16 @@
 import { createFileRoute } from "@tanstack/solid-router";
+import { Show } from "solid-js";
 
 import { ChevronDown } from "lucide-solid";
+
+import { getPartialFormState } from "#/lib/store/form-state.store";
+import { cn } from "#/utils/class-helper";
 
 import { Logo } from "#/components/icons/logo";
 import { Operator } from "#/components/sign-up/operator";
 import { Separator } from "#/components/ui/base-separator";
 import { SignupForm } from "#/components/sign-up/sign-up-form";
-import { classList } from "#/utils/class-helper";
-import { getPartialFormState } from "#/lib/store/form-state.store";
+import { SuccessCard } from "#/components/sign-up/success-card";
 
 export const Route = createFileRoute("/_layout/_auth/signup")({
 	component: RouteComponent,
@@ -16,16 +19,26 @@ export const Route = createFileRoute("/_layout/_auth/signup")({
 function RouteComponent() {
 	const isSuccesfullySubmitted = getPartialFormState("isSuccesfullySubmitted");
 
+	const validFieldsCounts = getPartialFormState("validFieldsCounts");
+
 	return (
 		<div class="grid items-center gap-4 overflow-clip px-4 py-8.5 md:grid-cols-[566fr_434fr]">
 			<div>
 				<div class="flex flex-wrap items-center justify-between gap-4 *:shrink-0">
 					<Logo class="block-auto inline-max" />
-					<span class="uppercase md:hidden">0/5 ready</span>
+					<span
+						class={cn("uppercase transition-colors duration-200 md:hidden", {
+							"text-primary":
+								isSuccesfullySubmitted() || validFieldsCounts() === 5,
+						})}>
+						{isSuccesfullySubmitted()
+							? "provisioned"
+							: `${validFieldsCounts()}/5 ready`}
+					</span>
 				</div>
 
 				<h1 class="mbs-[clamp(2.5rem,0.4776rem+8.6286vw,6rem)] font-sans font-bold tracking-wider text-text uppercase">
-					<span class="me-2 inline-block text-primary">{`//`}</span>
+					<span class="me-2 inline-block text-primary">{"//"}</span>
 					Join the nexus
 				</h1>
 
@@ -39,16 +52,14 @@ function RouteComponent() {
 			</div>
 
 			<div
-				class={classList(
+				class={cn(
 					"@container/signup relative grid items-center border border-border bg-bg-card min-block-176.25",
-					{
-						shake:
-							isSuccesfullySubmitted() !== undefined &&
-							!isSuccesfullySubmitted(),
-					},
+					{ shake: isSuccesfullySubmitted() === false },
 				)}>
 				<div class="px-[clamp(1.1875rem,-10.2454rem+48.7804cqw,2.4375rem)] py-[clamp(1.875rem,-2.6981rem+19.5121cqw,2.375rem)]">
-					<SignupForm />
+					<Show when={isSuccesfullySubmitted()} fallback={<SignupForm />}>
+						<SuccessCard />
+					</Show>
 				</div>
 
 				<ChevronDown

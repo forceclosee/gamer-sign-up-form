@@ -28,10 +28,11 @@ export const Link = (props: Props) => {
 			to={core.to}
 			class={cn(
 				{
-					"flex items-center justify-center bg-primary px-4 font-medium text-text-inverse transition-all duration-200 min-block-9.5 trim-text active:scale-95":
+					"flex items-center justify-center bg-primary px-4 font-medium text-text-inverse transition-all duration-200 min-block-12 trim-text active:scale-95":
 						core.variant === "primary",
 				},
 				{ "py-0.5 text-primary hover-underline": core.variant === "inline" },
+				props.class,
 			)}
 			{...rest}>
 			{core.children}
