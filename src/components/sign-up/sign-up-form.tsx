@@ -100,8 +100,8 @@ export const SignupForm = () => {
 
 	return (
 		<>
-			<div class="flex flex-wrap justify-between gap-x-4 gap-y-2 uppercase *:shrink-0 *:tracking-500">
-				<span>New operator</span>
+			<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 uppercase *:shrink-0 *:tracking-500">
+				<h2 class="trim-capital">New operator</h2>
 				<span class="@md/signup:hidden">All required</span>
 				<span class="hidden @md/signup:inline">All fields required</span>
 			</div>
@@ -117,25 +117,7 @@ export const SignupForm = () => {
 				}}
 				class="grid gap-5.5">
 				<form.AppForm>
-					<form.AppField
-						name="signupCallsign"
-						validators={{
-							// check username availability
-							onChangeAsyncDebounceMs: 500,
-							onChangeAsync: async ({ value }) => {
-								const { data: response } = await authClient.isUsernameAvailable(
-									{
-										username: value,
-									},
-								);
-
-								if (!response?.available) {
-									return new Error(
-										"Callsign is already taken. Please create different callsign.",
-									);
-								}
-							},
-						}}>
+					<form.AppField name="signupCallsign">
 						{(field) => (
 							<field.TextField
 								label="Callsign"

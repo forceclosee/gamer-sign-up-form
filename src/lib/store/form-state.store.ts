@@ -10,7 +10,6 @@ type Validity =
 	| "bad character"
 	| "malformed"
 	| "mismatch"
-	| "not available"
 	| "ok"
 	| "locked";
 
