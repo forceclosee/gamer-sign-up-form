@@ -1,9 +1,11 @@
 import { useAppForm } from "#/hook/form";
 import { signupSchema } from "#/lib/schema/sign-up-schema";
 import { updateFormState } from "#/lib/store/form-state.store";
+import { authClient } from "#/lib/auth-client";
 
 import { Separator } from "#/components/ui/base-separator";
 import { Link } from "#/components/ui/link";
+import { stackedToast } from "#/components/ui/base-toast";
 
 export const SignupForm = () => {
 	const form = useAppForm(() => ({
@@ -19,8 +21,66 @@ export const SignupForm = () => {
 			onSubmit: signupSchema,
 		},
 
-		onSubmit: async () => {
-			await new Promise((resolve) => setTimeout(resolve, 2000));
+		onSubmit: async ({ value, formApi }) => {
+			const { data, error } = await authClient.signUp.email({
+				name: value.signupCallsign,
+				username: value.signupCallsign,
+				email: value.signupEmail,
+				password: value.signupConfirmPassword,
+				acceptTerms: value.signupAcceptTerms,
+			});
+
+			if (error) {
+				const getErrorDescription = () => {
+					if (!error?.message) {
+						return "Something went wrong, Please try again later.";
+					}
+
+					switch (error?.message) {
+						case "Username is already taken. Please try another.":
+							return "Callsign is already taken. Please create different callsign.";
+
+						default:
+							return `${error.message}, Please try again later.`;
+					}
+				};
+
+				stackedToast.error({
+					title: "Signup Failed",
+					description: getErrorDescription(),
+				});
+
+				updateFormState({ isSuccesfullySubmitted: false });
+
+				setTimeout(() => {
+					updateFormState({ isSuccesfullySubmitted: undefined });
+				}, 400);
+
+				return;
+			}
+
+			formApi.reset();
+
+			stackedToast.success({
+				title: "Signup successfully",
+				description: `Thanks for signing up ${data.user.username}!`,
+			});
+
+			// synchronize form validity
+			updateFormState({
+				isSuccesfullySubmitted: true,
+				callsign: data.user.username,
+				callsignValidity: "locked",
+				emailValidity: "locked",
+				passwordValidity: "locked",
+				confirmPasswordValidity: "locked",
+				termsValidity: "locked",
+				isCallsignValid: true,
+				isEmailValid: true,
+				isPasswordValid: true,
+				isConfirmPasswordValid: true,
+				isTermsValid: true,
+			});
 		},
 
 		onSubmitInvalid() {
@@ -57,7 +117,25 @@ export const SignupForm = () => {
 				}}
 				class="grid gap-5.5">
 				<form.AppForm>
-					<form.AppField name="signupCallsign">
+					<form.AppField
+						name="signupCallsign"
+						validators={{
+							// check username availability
+							onChangeAsyncDebounceMs: 500,
+							onChangeAsync: async ({ value }) => {
+								const { data: response } = await authClient.isUsernameAvailable(
+									{
+										username: value,
+									},
+								);
+
+								if (!response?.available) {
+									return new Error(
+										"Callsign is already taken. Please create different callsign.",
+									);
+								}
+							},
+						}}>
 						{(field) => (
 							<field.TextField
 								label="Callsign"

@@ -1,5 +1,4 @@
-import { createEffect, For } from "solid-js";
-import { createMemo } from "solid-js";
+import { createMemo, For } from "solid-js";
 
 import { getPartialFormState } from "#/lib/store/form-state.store";
 
@@ -62,10 +61,6 @@ export const Operator = () => {
 
 		return validFields().length;
 	};
-
-	createEffect(() => {
-		console.log(getValidFieldsCount());
-	});
 
 	return (
 		<div class="uppercase">

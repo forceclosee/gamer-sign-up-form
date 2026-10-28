@@ -156,6 +156,103 @@
 				calc(20 * var(--size)) 0 var(--color-1);
 		}
 	}
+
+	:is(.base-toast-viewport:hover, .base-toast-viewport:focus-within)
+		.base-stacked-toast-root {
+		translate: var(--toast-swipe-movement-x) var(--offset-y);
+		scale: 1;
+		block-size: auto;
+	}
+
+	.base-stacked-toast-root {
+		--gap: 0.75rem;
+		--peek: 1.2rem;
+		--scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
+		--shrink: calc(1 - var(--scale));
+		--offset-y: calc(
+			var(--toast-offset-y) *
+			-1 +
+			calc(var(--toast-index) * var(--gap) * -1) +
+			var(--toast-swipe-movement-y)
+		);
+		--shadow-color: light-dark(oklch(0 0 none / 12%), transparent);
+
+		position: absolute;
+		inset-inline-start: auto;
+		inset-inline-end: 0;
+		inset-block-end: 0;
+		z-index: calc(1000 - var(--toast-index));
+		inline-size: 100%;
+		border: 1px solid var(--color-border);
+		margin-inline-start: auto;
+		margin-inline-end: 0;
+		margin-block: 0;
+		box-shadow: 0.25rem 0.25rem 0 var(--shadow-color);
+		translate: var(--toast-swipe-movement-x)
+			calc(var(--toast-swipe-movement-y) - (var(--toast-index) * var(--peek)));
+		scale: var(--scale);
+		transform-origin: bottom center;
+		-webkit-user-select: none;
+		user-select: none;
+		cursor: default;
+		transition:
+			translate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+			scale 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.5s,
+			block-size 0.15s;
+
+		&[data-limited] {
+			opacity: 0;
+		}
+
+		&[data-starting-style] {
+			translate: 0 150%;
+			scale: 1;
+		}
+
+		&[data-ending-style] {
+			opacity: 0;
+			translate: 0 150%;
+			scale: 1;
+
+			&[data-swipe-direction="up"] {
+				translate: 0 calc(var(--toast-swipe-movement-y) - 150%);
+			}
+			&[data-swipe-direction="left"] {
+				translate: calc(var(--toast-swipe-movement-x) - 150%) var(--offset-y);
+			}
+			&[data-swipe-direction="right"] {
+				translate: calc(var(--toast-swipe-movement-x) + 150%) var(--offset-y);
+			}
+			&[data-swipe-direction="down"] {
+				translate: 0 calc(var(--toast-swipe-movement-y) + 150%);
+			}
+		}
+
+		&[data-type="default"] {
+			background-color: var(--color-bg-card);
+			color: var(--color-text);
+		}
+
+		&[data-type="success"] {
+			background-color: var(--color-bg-sucess-inverse);
+			color: var(--color-text-success-inverse);
+		}
+
+		&[data-type="error"] {
+			background-color: var(--color-bg-error-inverse);
+			color: var(--color-text-error-inverse);
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-block-start: 100%;
+			inline-size: 100%;
+			inset-inline-start: 0;
+			block-size: calc(var(--gap) + 1px);
+		}
+	}
 }
 
 @utility squircle {

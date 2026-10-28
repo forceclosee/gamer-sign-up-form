@@ -40,9 +40,20 @@ export const TextField = (props: Props) => {
 	return (
 		<form.Subscribe selector={(state) => state.submissionAttempts}>
 			{(submissionAttempts) => {
-				const isInputInvalid = () =>
-					!field().state.meta.isValid &&
-					(field().state.meta.isBlurred || submissionAttempts() > 0);
+				const isInputInvalid = () => {
+					if (
+						field().name === "signupCallsign" &&
+						field().state.meta.errors[0]?.message ===
+							"Callsign is already taken. Please create different callsign."
+					) {
+						return !field().state.meta.isValid;
+					}
+
+					return (
+						!field().state.meta.isValid &&
+						(field().state.meta.isBlurred || submissionAttempts() > 0)
+					);
+				};
 
 				const isInputValid = () =>
 					field().state.meta.isValid && field().state.meta.isDirty;
@@ -86,7 +97,11 @@ export const TextField = (props: Props) => {
 									break;
 
 								case "Use letters, numbers, _ or - only":
-									updateFormState({ callsignValidity: "malformed" });
+									updateFormState({ callsignValidity: "bad character" });
+									break;
+
+								case "Callsign is already taken. Please create different callsign.":
+									updateFormState({ callsignValidity: "not available" });
 									break;
 							}
 						}

@@ -18,6 +18,7 @@ import "@fontsource-variable/orbitron";
 
 // Jetbrains mono variable 100 - 800
 import "@fontsource-variable/jetbrains-mono";
+import { StackedToastProvider } from "#/components/ui/base-toast";
 
 export const Route = createRootRouteWithContext()({
 	head: () => ({
@@ -94,7 +95,10 @@ function RootComponent() {
 			</head>
 			<body>
 				<Suspense>
-					<Outlet />
+					<StackedToastProvider>
+						<Outlet />
+					</StackedToastProvider>
+
 					<TanStackRouterDevtools />
 				</Suspense>
 				<Scripts />
