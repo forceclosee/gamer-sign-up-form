@@ -20,6 +20,7 @@ export const auth = betterAuth({
 	plugins: [
 		username({
 			maxUsernameLength: 20,
+			usernameNormalization: false,
 			usernameValidator: (username) => {
 				return /^[a-zA-Z0-9_-]+$/.test(username);
 			},
