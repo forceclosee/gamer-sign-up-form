@@ -27,6 +27,7 @@ interface FormStateStore {
 	isPasswordValid: boolean | undefined;
 	isConfirmPasswordValid: boolean | undefined;
 	isTermsValid: boolean | undefined;
+	validFieldsCounts: number;
 }
 
 export const formStateStore = createStore<FormStateStore>({
@@ -42,6 +43,7 @@ export const formStateStore = createStore<FormStateStore>({
 	isPasswordValid: undefined,
 	isConfirmPasswordValid: undefined,
 	isTermsValid: undefined,
+	validFieldsCounts: 0,
 });
 
 export const getPartialFormState = <K extends keyof FormStateStore>(
