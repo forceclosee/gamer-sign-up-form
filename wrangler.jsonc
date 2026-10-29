@@ -1,7 +1,7 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
-  "compatibility_date": "2026-10-29",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/solid-start/server-entry"
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "gamer-sign-up-form",
+	"compatibility_date": "2026-10-26",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "@tanstack/solid-start/server-entry"
 }
