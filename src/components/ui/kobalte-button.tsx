@@ -10,7 +10,7 @@ import { Button as KbButton } from "@kobalte/core/button";
 import { cn } from "#/utils/class-helper";
 
 interface Props extends ComponentProps<"button"> {
-	variant?: "plain" | "primary";
+	variant?: "plain" | "primary" | "danger";
 }
 
 export const Button = (props: ParentProps<Props>) => {
@@ -32,6 +32,10 @@ export const Button = (props: ParentProps<Props>) => {
 				{
 					"bg-primary px-4 font-medium text-text-inverse min-block-12 hover:bg-text hover:hover-button-shadow data-disabled:border data-disabled:border-primary data-disabled:bg-transparent data-disabled:text-primary":
 						core.variant === "primary",
+				},
+				{
+					"bg-bg-error text-text min-block-12 hover:bg-bg-error/90 hover:hover-button-danger-shadow data-disabled:bg-bg-error/60 data-disabled:text-text-muted":
+						core.variant === "danger",
 				},
 				core.class,
 			)}
