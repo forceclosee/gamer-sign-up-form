@@ -8,7 +8,6 @@ export const Logo = (props: ComponentProps<"svg">) => {
 			height="32"
 			fill="none"
 			viewBox="0 0 169 32"
-			class={props.class}
 			aria-hidden
 			{...props}>
 			<path

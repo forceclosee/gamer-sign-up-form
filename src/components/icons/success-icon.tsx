@@ -8,7 +8,6 @@ export const SuccessIcon = (props: ComponentProps<"svg">) => {
 			height="72"
 			fill="none"
 			viewBox="0 0 78 72"
-			class={props.class}
 			aria-hidden
 			{...props}>
 			<g

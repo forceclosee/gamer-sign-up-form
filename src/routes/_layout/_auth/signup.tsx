@@ -11,6 +11,7 @@ import { Operator } from "#/components/sign-up/operator";
 import { Separator } from "#/components/ui/base-separator";
 import { SignupForm } from "#/components/sign-up/sign-up-form";
 import { SuccessCard } from "#/components/sign-up/success-card";
+import { BgPattern } from "#/components/icons/bg-pattern";
 
 export const Route = createFileRoute("/_layout/_auth/signup")({
 	component: RouteComponent,
@@ -22,7 +23,7 @@ function RouteComponent() {
 	const validFieldsCounts = getPartialFormState("validFieldsCounts");
 
 	return (
-		<div class="grid items-center gap-4 overflow-clip px-4 py-8.5 md:grid-cols-[566fr_434fr]">
+		<div class="relative mx-auto grid items-center gap-4 px-4 py-8.5 md:grid-cols-[566fr_434fr]">
 			<div>
 				<div class="flex flex-wrap items-center justify-between gap-4 *:shrink-0">
 					<Logo class="block-auto inline-max" />
@@ -74,6 +75,8 @@ function RouteComponent() {
 					class="absolute -inset-e-6.5 -inset-be-6.5 rotate-315 text-primary block-16 inline-16"
 				/>
 			</div>
+
+			<BgPattern class="absolute inset-e-0 inset-bs-0 -z-1 translate-x-[49.2%] opacity-50 max-block-full max-inline-full" />
 		</div>
 	);
 }
