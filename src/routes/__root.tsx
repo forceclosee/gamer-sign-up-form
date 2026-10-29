@@ -10,7 +10,7 @@ import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 import { HydrationScript } from "solid-js/web";
 import { Suspense } from "solid-js";
 
-import favicon from "/icon.svg";
+import favicon from "/favicon.png";
 import globalCss from "#/styles/global.css?url";
 
 import { getSession } from "#/utils/auth.function";
@@ -34,7 +34,7 @@ export const Route = createRootRouteWithContext()({
 				content: "width=device-width, initial-scale=1.0",
 			},
 			{
-				title: "Gamer Signup Form | ForceClose",
+				title: "NEONCORE",
 			},
 			{
 				name: "author",
@@ -42,25 +42,26 @@ export const Route = createRootRouteWithContext()({
 			},
 			{
 				name: "description",
-				content: "",
+				content: "NEONCORE - a competitive-gaming network",
 			},
 
 			// OG Tags
 			{
 				property: "og:title",
-				content: "",
+				content: "NEONCORE",
 			},
 			{
 				property: "og:description",
-				content: "",
+				content: "NEONCORE - a competitive-gaming network",
 			},
 			{
 				property: "og:image",
-				content: "",
+				content:
+					"https://res.cloudinary.com/dspqgpnvq/image/upload/v1793256148/gamer-signup-form_mtkcij.png",
 			},
 			{
 				property: "og:url",
-				content: "",
+				content: "https://gamer-sign-up-form.forceclose.workers.dev",
 			},
 			{
 				property: "og:type",
@@ -76,7 +77,7 @@ export const Route = createRootRouteWithContext()({
 			{
 				rel: "icon",
 				href: favicon,
-				type: "image/svg+xml",
+				type: "image/png",
 			},
 
 			// css

@@ -18,6 +18,10 @@ export const Route = createFileRoute("/_layout/_auth/login")({
 		}
 	},
 
+	head: () => ({
+		meta: [{ title: "Login | NEONCORE" }],
+	}),
+
 	component: RouteComponent,
 });
 
