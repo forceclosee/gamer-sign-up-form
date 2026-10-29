@@ -178,7 +178,9 @@ export const SignupForm = () => {
 
 					<form.SubmitButton
 						label="Initialize account"
-						labelSubmitting={<span class="signup-loader"></span>}
+						labelSubmitting={
+							<span class="loader" data-label="TRANSMITTING"></span>
+						}
 					/>
 				</form.AppForm>
 			</form>

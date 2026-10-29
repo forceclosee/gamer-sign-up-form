@@ -41,7 +41,7 @@ export const signupSchema = z
 	.object({
 		signupCallsign: z
 			.string()
-			.min(1, "Enter a callsign")
+			.min(1, "Callsign is required")
 			.min(3, "Use at least 3 characters")
 			.max(20, "Use 20 characters or fewer")
 			.regex(/^[a-zA-Z0-9_-]+$/, "Use letters, numbers, _ or - only"),

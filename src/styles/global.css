@@ -114,7 +114,7 @@
 }
 
 @layer components {
-	.signup-loader {
+	.loader {
 		--color-1: oklch(1 0 none);
 		--color-2: oklch(1 0 none / 0);
 		--size: 0.667px;
@@ -124,7 +124,7 @@
 		font-size: calc(24 * var(--size));
 
 		&::before {
-			content: "TRANSMITTING";
+			content: attr(data-label);
 		}
 
 		&::after {
