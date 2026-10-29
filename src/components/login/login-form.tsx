@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/solid-router";
 import type { Setter } from "solid-js";
 
 import { useAppForm } from "#/hook/form";
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export const LoginForm = (props: Props) => {
+	const navigate = useNavigate();
+
 	const form = useAppForm(() => ({
 		defaultValues: {
 			loginCallsignOrEmail: "",
@@ -47,6 +50,9 @@ export const LoginForm = (props: Props) => {
 				title: "Login successfully",
 				description: `Welcome back ${data.user.username}!`,
 			});
+
+			// redirect to welcome page
+			navigate({ to: "/welcome", replace: true });
 		},
 
 		onSubmitInvalid() {

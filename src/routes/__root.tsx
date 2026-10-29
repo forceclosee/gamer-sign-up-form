@@ -13,12 +13,15 @@ import { Suspense } from "solid-js";
 import favicon from "/icon.svg";
 import globalCss from "#/styles/global.css?url";
 
+import { getSession } from "#/utils/auth.function";
+
+import { StackedToastProvider } from "#/components/ui/base-toast";
+
 // Orbitron variable 400 - 900
 import "@fontsource-variable/orbitron";
 
 // Jetbrains mono variable 100 - 800
 import "@fontsource-variable/jetbrains-mono";
-import { StackedToastProvider } from "#/components/ui/base-toast";
 
 export const Route = createRootRouteWithContext()({
 	head: () => ({
@@ -83,6 +86,13 @@ export const Route = createRootRouteWithContext()({
 			},
 		],
 	}),
+
+	beforeLoad: async () => {
+		const session = await getSession();
+
+		return { user: session?.user };
+	},
+
 	component: RootComponent,
 });
 

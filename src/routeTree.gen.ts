@@ -13,6 +13,7 @@ import { Route as LayoutRouteRouteImport } from './routes/_layout/route'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutAuthLoginRouteImport } from './routes/_layout/_auth/login'
 import { Route as LayoutAuthSignupRouteImport } from './routes/_layout/_auth/signup'
+import { Route as LayoutAuthWelcomeRouteImport } from './routes/_layout/_auth/welcome'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const LayoutRouteRoute = LayoutRouteRouteImport.update({
@@ -34,6 +35,11 @@ const LayoutAuthSignupRoute = LayoutAuthSignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => LayoutRouteRoute,
 } as any)
+const LayoutAuthWelcomeRoute = LayoutAuthWelcomeRouteImport.update({
+  id: '/_auth/welcome',
+  path: '/welcome',
+  getParentRoute: () => LayoutRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -44,12 +50,14 @@ export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/login': typeof LayoutAuthLoginRoute
   '/signup': typeof LayoutAuthSignupRoute
+  '/welcome': typeof LayoutAuthWelcomeRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
   '/login': typeof LayoutAuthLoginRoute
   '/signup': typeof LayoutAuthSignupRoute
+  '/welcome': typeof LayoutAuthWelcomeRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -58,19 +66,21 @@ export interface FileRoutesById {
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/_auth/login': typeof LayoutAuthLoginRoute
   '/_layout/_auth/signup': typeof LayoutAuthSignupRoute
+  '/_layout/_auth/welcome': typeof LayoutAuthWelcomeRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/api/auth/$'
+  fullPaths: '/' | '/login' | '/signup' | '/welcome' | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/api/auth/$'
+  to: '/' | '/login' | '/signup' | '/welcome' | '/api/auth/$'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/'
     | '/_layout/_auth/login'
     | '/_layout/_auth/signup'
+    | '/_layout/_auth/welcome'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -109,6 +119,13 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof LayoutAuthSignupRouteImport
       parentRoute: typeof LayoutRouteRoute
     }
+    '/_layout/_auth/welcome': {
+      id: '/_layout/_auth/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof LayoutAuthWelcomeRouteImport
+      parentRoute: typeof LayoutRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -123,12 +140,14 @@ interface LayoutRouteRouteChildren {
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutAuthLoginRoute: typeof LayoutAuthLoginRoute
   LayoutAuthSignupRoute: typeof LayoutAuthSignupRoute
+  LayoutAuthWelcomeRoute: typeof LayoutAuthWelcomeRoute
 }
 
 const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutAuthLoginRoute: LayoutAuthLoginRoute,
   LayoutAuthSignupRoute: LayoutAuthSignupRoute,
+  LayoutAuthWelcomeRoute: LayoutAuthWelcomeRoute,
 }
 
 const LayoutRouteRouteWithChildren = LayoutRouteRoute._addFileChildren(

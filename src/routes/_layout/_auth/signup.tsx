@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/solid-router";
+import { createFileRoute, redirect } from "@tanstack/solid-router";
 import { Show } from "solid-js";
 
 import { ChevronDown } from "lucide-solid";
@@ -14,6 +14,14 @@ import { SuccessCard } from "#/components/sign-up/success-card";
 import { BgPattern } from "#/components/icons/bg-pattern";
 
 export const Route = createFileRoute("/_layout/_auth/signup")({
+	beforeLoad: async ({ context }) => {
+		if (context.user) {
+			throw redirect({
+				to: "/welcome",
+			});
+		}
+	},
+
 	component: RouteComponent,
 });
 
