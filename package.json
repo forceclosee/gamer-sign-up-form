@@ -8,6 +8,8 @@
 		"build": "vite build",
 		"start": "node .output/server/index.mjs",
 		"preview": "vite preview",
+		"deploy": "pn build && wrangler deploy",
+		"cf-typegen": "wrangler types",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"format": "biome format",
@@ -39,13 +41,15 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.6.2",
+		"@cloudflare/vite-plugin": "^1.65.0",
 		"@tanstack/devtools-vite": "0.8.5",
 		"@tanstack/router-cli": "^1.133.21",
 		"@types/node": "^26.6.5",
 		"drizzle-kit": "1.0.0-rc.5",
 		"typescript": "^7.0.2",
 		"vite": "^8.0.0",
-		"vite-plugin-solid": "^2.11.12"
+		"vite-plugin-solid": "^2.11.12",
+		"wrangler": "^4.154.0"
 	},
 	"packageManager": "pnpm@12.5.1"
 }
