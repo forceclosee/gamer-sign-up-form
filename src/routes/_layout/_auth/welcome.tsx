@@ -58,7 +58,11 @@ function RouteComponent() {
 						Handshake complete
 					</h1>
 
-					<p class="mbs-4.5 text-base">{`Operator ${authContext().user?.username} provisioned. Your account is ready.`}</p>
+					<p class="mbs-4.5 text-base">
+						Operator{" "}
+						<span class="text-primary">{authContext().user?.username}</span>{" "}
+						provisioned. Your account is ready.
+					</p>
 
 					<Button
 						variant="danger"

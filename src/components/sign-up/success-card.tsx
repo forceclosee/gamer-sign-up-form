@@ -14,7 +14,10 @@ export const SuccessCard = () => {
 				Handshake complete
 			</h2>
 
-			<p class="mbs-4.5 text-base">{`Operator ${callsign()} provisioned. Your account is ready.`}</p>
+			<p class="mbs-4.5 text-base">
+				Operator <span class="text-primary">{callsign()}</span> provisioned.
+				Your account is ready.
+			</p>
 
 			<Link
 				to="/login"
