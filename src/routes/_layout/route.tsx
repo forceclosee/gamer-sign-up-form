@@ -13,7 +13,10 @@ function RouteComponent() {
 			<BgPattern class="absolute inset-e-0 inset-bs-0 -z-1 translate-x-[29.5%] -translate-y-8.25 opacity-30 max-block-full max-inline-full" />
 
 			<div class="mx-auto grid grid-rows-[1fr_auto] gap-4 max-inline-lg min-block-svh md:max-inline-6xl">
-				<Outlet />
+				<main>
+					<Outlet />
+				</main>
+
 				<Footer />
 			</div>
 		</div>
